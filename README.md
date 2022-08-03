@@ -29,6 +29,8 @@ You are free to take this and use it as a base for your personal needs, hosting 
 - Fraud prevention
 - Knowledgebase
 - Coupon Codes
+- Invoicing
+
 ## Demo
 
 ![alt text](https://i.imgur.com/c7ONJ0b.png)
