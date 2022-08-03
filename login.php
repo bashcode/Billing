@@ -1,3 +1,11 @@
+<?php
+session_start();
+include 'includes/handler.inc.php';
+$database = new Database();
+$login = new Login();
+$session = new Session();
+$session->loggedIn();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,15 +22,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <form method="post">
                 <div class="login-div div-bg">
                     <h1 class="form-title">Sign-in</h1>
                     <p class="form-description grey">Please login to access your services. You may require email verification.<br></p>
-                    <div class="input-div"><label class="form-label grey" for="email">Email Address</label><input type="email" class="form-input" placeholder="Enter your email address..." name="email"></div>
-                    <div class="input-div"><label class="form-label grey" for="password">Password</label><input type="password" class="form-input" placeholder="Enter your password..." name="password"></div><a href="forgot.html">
+                    <div class="input-div"><label class="form-label grey" for="email">Email Address</label><input name="email" type="email" class="form-input" placeholder="Enter your email address..." name="email"></div>
+                    <div class="input-div"><label class="form-label grey" for="password">Password</label><input name="password" type="password" class="form-input" placeholder="Enter your password..." name="password"></div><a href="forgot.html">
                         <p class="purple forgot flink transition">Forgot your password?</p>
-                    </a><button class="purple form-button transition" type="button">Sign In</button>
+                    </a><button class="purple form-button transition" name="submit" type="submit">Sign In</button>
                     <p class="form-link">Or&nbsp;<a href="register.html"><span class="purple flink transition">click here to register</span></a></p>
                 </div>
+                </form>
             </div>
         </div>
     </div>

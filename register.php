@@ -1,7 +1,10 @@
 <?php
+session_start();
 include 'includes/handler.inc.php';
 $database = new Database();
 $register = new Register();
+$session = new Session();
+$session->loggedIn();
 ?>
 <!DOCTYPE html>
 <html lang="en">
