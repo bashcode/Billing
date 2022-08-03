@@ -1,3 +1,8 @@
+<?php
+include 'includes/handler.inc.php';
+$database = new Database();
+$register = new Register();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,14 +19,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <form method="post">
                 <div class="login-div div-bg">
                     <h1 class="form-title">Register</h1>
                     <p class="form-description grey">Welcome to our platform! To take a look at our services, please register for an account.<br></p>
-                    <div class="input-div"><label class="form-label grey" for="email">Email Address</label><input type="email" class="form-input" placeholder="Enter your email address..." name="email"></div>
-                    <div class="input-div"><label class="form-label grey" for="password">Password</label><input type="password" class="form-input" placeholder="Enter your password..." name="password"></div>
-                    <div class="input-div"><label class="form-label grey" for="confirm">Confirm Password</label><input type="password" class="form-input" placeholder="Confirm your password..." name="confirm"></div><button class="purple form-button transition" type="button">Register</button>
+                    <div class="input-div"><label class="form-label grey" for="email">Email Address</label><input type="email" name="email" class="form-input" placeholder="Enter your email address..." name="email"></div>
+                    <div class="input-div"><label class="form-label grey" for="password">Password</label><input type="password" name="password" class="form-input" placeholder="Enter your password..." name="password"></div>
+                    <div class="input-div"><label class="form-label grey" for="confirm">Confirm Password</label><input type="password" name="confirm" class="form-input" placeholder="Confirm your password..." name="confirm"></div><button name="submit" type="submit" class="purple form-button transition" type="button">Register</button>
                     <p class="form-link">Or&nbsp;<a href="login.html"><span class="purple flink transition">click here to login</span></a></p>
                 </div>
+            </form>
             </div>
         </div>
     </div>

@@ -1,3 +1,7 @@
+<?php
+include 'includes/handler.inc.php';
+$database = new Database();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
