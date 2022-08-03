@@ -3,6 +3,8 @@ session_start();
 include '../includes/handler.inc.php';
 $session = new Session();
 $session->dashboard();
+$database = new Database();
+$sql = $database->pullServices();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +24,7 @@ $session->dashboard();
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><img class="nav-icon" src="../assets/img/dashboard%201.svg"><a class="nav-link active" href="#">Dashboard</a></li>
-                    <li class="nav-item"><img class="nav-icon" src="../assets/img/server%201.svg"><a class="nav-link" href="services.html">My Services</a></li>
+                    <li class="nav-item"><img class="nav-icon" src="../assets/img/server%201.svg"><a class="nav-link" href="services.php">My Services</a></li>
                     <li class="nav-item"><img class="nav-icon" src="../assets/img/heart%20(1)%201.svg" width="20" height="43"><a class="nav-link" href="#">Tickets</a></li>
                     <li class="nav-item"><img class="nav-icon" src="../assets/img/settings%202.svg"><a class="nav-link" href="#">Account Settings</a></li>
                 </ul><img class="picture" src="../assets/img/unsplash_WNoLnJo7tS8.svg">
@@ -71,21 +73,21 @@ $session->dashboard();
             <div class="col-md-6">
                 <div class="div-bg">
                     <div class="dash-two">
-                        <p class="second-title grey"><a href="services.html"><span class="view purple">View All</span></a>Your Services</p>
+                        <p class="second-title grey"><a href="services.php"><span class="view purple">View All</span></a>Your Services</p>
                     </div>
                     <div class="section-dash-two">
+                        <?php
+                        $int = 0;
+                        while($int < 3 && $row = $sql->fetch(PDO::FETCH_ASSOC)){
+                        ?>
                         <div class="sec-div">
-                            <p class="grey title-two">CPanel - Unlimited Package<span class="date">19/02/2022</span><br></p>
-                            <p class="grey title-link purple">https://qrow.dev/<span class="status green">Active</span><br></p>
+                            <p class="grey title-two"><?php echo $row['package_name']?><span class="date"><?php echo $row['createdAt']?></span><br></p>
+                            <p class="grey title-link purple"><?php echo $row['domain']?><span class="status green"><?php echo $row['status']?></span><br></p>
                         </div>
-                        <div class="sec-div">
-                            <p class="grey title-two">CPanel - 100 GB Package<span class="date">23/08/2021</span><br></p>
-                            <p class="grey title-link purple">https://ethereal.host/<span class="status red">Terminated</span><br></p>
-                        </div>
-                        <div class="sec-div">
-                            <p class="grey title-two">CPanel - Reseller<span class="date">12/06/2021</span><br></p>
-                            <p class="grey title-link purple">https://cabbage.dev/<span class="status red">Terminated</span><br></p>
-                        </div>
+                        <?php
+                        $int++;
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

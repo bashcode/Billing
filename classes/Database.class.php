@@ -6,6 +6,8 @@ class Database {
     private $name = 'billing';
     private $username = 'root';
     private $password = '';
+    private $row;
+    private $sql;
 
     function __construct() {
         try {
@@ -41,7 +43,8 @@ class Database {
                 domain TEXT NOT NULL,
                 user VARCHAR(255) NOT NULL,
                 cpanel_username VARCHAR(255) NOT NULL,
-                cpanel_password VARCHAR(255) NOT NULL
+                cpanel_password VARCHAR(255) NOT NULL,
+                status VARCHAR(50) NOT NULL
             )");
 
             $this->connection->exec("CREATE TABLE IF NOT EXISTS modules(
@@ -56,5 +59,12 @@ class Database {
         } catch(PDOException $err) {
             echo $err;
         }
+    }
+
+    function pullServices() {
+        $this->sql = $this->connection->prepare("SELECT * FROM services WHERE user = :user");
+        $email = $_SESSION['client']['email'];
+        $this->sql->execute([':user' => $email]);
+        return $this->sql;
     }
 }

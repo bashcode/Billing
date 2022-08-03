@@ -1,6 +1,8 @@
 <?php
-include '/includes/handler.inc.php';
+session_start();
+include 'includes/handler.inc.php';
 $database = new Database();
+$sql = $database->pullServices();
 ?>
 <!DOCTYPE html>
 <html lang="en">
