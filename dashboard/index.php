@@ -5,6 +5,7 @@ $session = new Session();
 $session->dashboard();
 $database = new Database();
 $sql = $database->pullServices();
+$statement = $database->userInfo();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,21 +48,21 @@ $sql = $database->pullServices();
         <div class="row">
             <div class="col-md-4">
                 <div class="div-bg stat">
-                    <h1 class="number">3</h1>
+                    <h1 class="number"><?php echo $statement['services'] ?></h1>
                     <p class="stat-title grey">Services</p>
                     <hr class="purple"><img class="stat-icon" src="../assets/img/server%201.svg">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="div-bg stat">
-                    <h1 class="number">4</h1>
+                    <h1 class="number"><?php echo $statement['tickets'] ?></h1>
                     <p class="stat-title grey">Tickets</p>
                     <hr class="red"><img class="stat-icon" src="../assets/img/heart%20(1)%201.svg">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="div-bg stat">
-                    <h1 class="number">1</h1>
+                    <h1 class="number"><?php echo $statement['invoices'] ?></h1>
                     <p class="stat-title grey">Invoices</p>
                     <hr class="orange"><img class="stat-icon" src="../assets/img/credit-cards%202.svg">
                 </div>
@@ -82,7 +83,7 @@ $sql = $database->pullServices();
                         ?>
                         <div class="sec-div">
                             <p class="grey title-two"><?php echo $row['package_name']?><span class="date"><?php echo $row['createdAt']?></span><br></p>
-                            <p class="grey title-link purple"><?php echo $row['domain']?><span class="status green"><?php echo $row['status']?></span><br></p>
+                            <p class="grey title-link purple"><?php echo $row['domain']?><?php if($row['status'] == "Active"){echo "<span class='status green'>Active</span>";}else {echo "<span class='status red'>Terminated</span>";} ?><br></p>
                         </div>
                         <?php
                         $int++;
@@ -97,18 +98,10 @@ $sql = $database->pullServices();
                         <p class="second-title grey">Your Tickets<span class="view purple">View All</span></p>
                     </div>
                     <div class="section-dash-two">
-                        <div class="sec-div">
+                        <!-- <div class="sec-div">
                             <p class="grey title-two">#1239 - Where is my login information?<span class="status green ticket-status">Active</span><br></p>
                             <p class="grey title-link purple">Last Updated: 19/02/2022<br></p>
-                        </div>
-                        <div class="sec-div">
-                            <p class="grey title-two">#873 - CPanel Down<span class="status orange ticket-status">On Hold</span><br></p>
-                            <p class="grey title-link purple">Last Updated: 13/12/2021<br></p>
-                        </div>
-                        <div class="sec-div">
-                            <p class="grey title-two">#231 - Payment not working<span class="status red ticket-status">Closed</span><br></p>
-                            <p class="grey title-link purple">Last Updated: 21/06/2021<br></p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

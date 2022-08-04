@@ -50,7 +50,7 @@ $sql = $database->pullServices();
         ?>
         <div class="col-md-6 mb-4">
                 <div class="div-bg service-div">
-                    <p class="purple service-name"><?php echo $row['package_name'] ?><span class="green-stat service-status"><?php echo $row['status'] ?></span><span class="grey service-id">Service ID: #<?php echo $row['id'] ?></span></p>
+                    <p class="purple service-name"><?php echo $row['package_name'] ?><?php if($row['status'] == "Active"){echo "<span class='green-stat service-status'>Active</span>";}else {echo "<span class='red service-status'>Terminated</span>";} ?><span class="grey service-id">Service ID: #<?php echo $row['id'] ?></span></p>
                     <div class="service-info mt-45">
                         <div class="service-div-inlien">
                             <p class="grey info-title">Started On</p>

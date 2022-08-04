@@ -9,6 +9,7 @@ class Database {
     private $row;
     private $sql;
     private $id;
+    private $email;
 
     function __construct() {
         try {
@@ -23,6 +24,8 @@ class Database {
                 password VARCHAR(60) NOT NULL,
                 createdAt VARCHAR(50) NOT NULL,
                 services INT(11) DEFAULT 0,
+                tickets INT(11) DEFAULT 0,
+                invoices INT(11) DEFAULT 0,
                 confirmed INT(11) DEFAULT 0,
                 confirmation_code VARCHAR(50),
                 ip_address VARCHAR(50),
@@ -64,9 +67,16 @@ class Database {
 
     function pullServices() {
         $this->sql = $this->connection->prepare("SELECT * FROM services WHERE user = :user");
-        $email = $_SESSION['client']['email'];
-        $this->sql->execute([':user' => $email]);
+        $this->email = $_SESSION['client']['email'];
+        $this->sql->execute([':user' => $this->email]);
         return $this->sql;
+    }
+
+    function userInfo() {
+        $this->sql = $this->connection->prepare("SELECT * FROM users WHERE email = :email");
+        $this->sql->execute([':email' => $this->email]);
+        $this->row = $this->sql->fetch();
+        return $this->row;
     }
 
     function servicePage() {
