@@ -5,7 +5,9 @@ $session = new Session();
 $session->dashboard();
 $database = new Database();
 $sql = $database->servicePage();
-$row = $sql->fetch()
+$row = $sql->fetch();
+$cpanel = new CPanel();
+$decode = $cpanel->requestInfo();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +26,8 @@ $row = $sql->fetch()
         <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><img class="nav-icon" src="../assets/img/dashboard%201.svg"><a class="nav-link" href="/dashboard/index.html">Dashboard</a></li>
-                    <li class="nav-item"><img class="nav-icon" src="../assets/img/server%201.svg"><a class="nav-link active" href="services.html">My Services</a></li>
+                    <li class="nav-item"><img class="nav-icon" src="../assets/img/dashboard%201.svg"><a class="nav-link" href="index.php">Dashboard</a></li>
+                    <li class="nav-item"><img class="nav-icon" src="../assets/img/server%201.svg"><a class="nav-link active" href="services.php">My Services</a></li>
                     <li class="nav-item"><img class="nav-icon" src="../assets/img/heart%20(1)%201.svg" width="20" height="43"><a class="nav-link" href="#">Tickets</a></li>
                     <li class="nav-item"><img class="nav-icon" src="../assets/img/settings%202.svg"><a class="nav-link" href="#">Account Settings</a></li>
                 </ul><img class="picture" src="../assets/img/unsplash_WNoLnJo7tS8.svg">
@@ -55,55 +57,43 @@ $row = $sql->fetch()
                         <div class="service-info">
                             <div class="service-div-inlien mb-3">
                                 <p class="grey info-title">Name</p>
-                                <p class="purple info-info">Unlimited Hosting</p>
+                                <p class="purple info-info"><?php echo $decode['acct'][0]['plan']; ?></p>
                             </div>
                             <div class="service-div-inlien mb-3">
                                 <p class="grey info-title">Domain</p>
-                                <p class="purple info-info">qrow.dev</p>
+                                <p class="purple info-info"><?php echo $decode['acct'][0]['domain']; ?></p>
                             </div>
                             <div class="service-div-inlien">
                                 <p class="grey info-title">Storage</p>
-                                <p class="purple info-info">Unlimited</p>
+                                <p class="purple info-info"><?php echo $decode['acct'][0]['disklimit']; ?></p>
                             </div>
                             <div class="service-div-inlien mb-3">
                                 <p class="grey info-title">Bandwidth</p>
-                                <p class="purple info-info">Unlimited</p>
+                                <p class="purple info-info">empty</p>
                             </div>
                             <div class="service-div-inlien mb-3">
                                 <p class="grey info-title">Domains</p>
-                                <p class="purple info-info">Unlimited</p>
+                                <p class="purple info-info"><?php echo $decode['acct'][0]['maxsub']; ?></p>
                             </div>
                             <div class="service-div-inlien mb-3">
                                 <p class="grey info-title">Contact Email</p>
-                                <p class="purple info-info">qrow@qrow.dev</p>
+                                <p class="purple info-info"><?php echo $decode['acct'][0]['email']; ?></p>
                             </div>
                             <div class="service-div-inlien mb-3">
                                 <p class="grey info-title">Email Accts</p>
-                                <p class="purple info-info">Unlimited</p>
-                            </div>
-                            <div class="service-div-inlien mb-3">
-                                <p class="grey info-title">Email Accts</p>
-                                <p class="purple info-info">Unlimited</p>
+                                <p class="purple info-info"><?php echo $decode['acct'][0]['max_emailacct_quota']; ?></p>
                             </div>
                             <div class="service-div-inlien mb-3">
                                 <p class="grey info-title">FTP Accts</p>
-                                <p class="purple info-info">Unlimited</p>
-                            </div>
-                            <div class="service-div-inlien mb-3">
-                                <p class="grey info-title">FTP Accts</p>
-                                <p class="purple info-info">Unlimited</p>
+                                <p class="purple info-info"><?php echo $decode['acct'][0]['maxftp']; ?></p>
                             </div>
                             <div class="service-div-inlien mb-3">
                                 <p class="grey info-title">Max Databases</p>
-                                <p class="purple info-info">Unlimited</p>
+                                <p class="purple info-info"><?php echo $decode['acct'][0]['maxsql']; ?></p>
                             </div>
                             <div class="service-div-inlien mb-3">
-                                <p class="grey info-title">Quota</p>
-                                <p class="purple info-info">Unlimited</p>
-                            </div>
-                            <div class="service-div-inlien mb-3">
-                                <p class="grey info-title">Reseller</p>
-                                <p class="purple info-info">False</p>
+                                <p class="grey info-title">Disk Limit</p>
+                                <p class="purple info-info"><?php echo $decode['acct'][0]['disklimit']; ?></p>
                             </div>
                         </div>
                     </div>
@@ -116,11 +106,11 @@ $row = $sql->fetch()
                     </div>
                     <div class="section-dash-two" style="display: inline-block;text-align: center;width: 100%;padding: 1.6rem 0;"><div style="display: inline-block">
 <div class="semi-donut margin" 
-     style="--percentage : 100; --fill: #FF3D00 ;">
-  72%
+     style="--percentage : 0; --fill: #FF3D00 ;">
+   0%
 </div>
     <p class="grey usage-title"> Disk Usage </p>
-    <p class="purple usage-number"> 1914 MB / 2200 MB </p>
+    <p class="purple usage-number"> <?php echo $decode['acct'][0]['diskused']; ?> MB / <?php echo $decode['acct'][0]['disklimit']; ?> MB </p>
 </div>
 
 <div style="display: inline-block">
