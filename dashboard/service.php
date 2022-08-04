@@ -1,3 +1,12 @@
+<?php
+session_start();
+include '../includes/handler.inc.php';
+$session = new Session();
+$session->dashboard();
+$database = new Database();
+$sql = $database->servicePage();
+$row = $sql->fetch()
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +38,7 @@
     <div class="container mt-7">
         <div class="row">
             <div class="col-md-12">
-                <p class="grey panel-p">Service - #139</p>
+                <p class="grey panel-p">Service - #<?php echo $row['id']?></p>
                 <p class="grey panel-header">My Services</p>
                 <p class="grey panel-p">Here is the individual information about your service.<br></p>
             </div>

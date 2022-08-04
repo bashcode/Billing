@@ -69,7 +69,7 @@ $sql = $database->pullServices();
                             <p class="purple info-info"><?php echo $row['domain'] ?></p>
                         </div>
                     </div>
-                    <div><a href='service.html'><p class="footer-bottom-text mt-45">Login to CPanel<span>View Details</span></a></p></div>
+                    <div><a href='service.php?id=<?php echo $row['id']?>'><p class="footer-bottom-text mt-45">Login to CPanel<span>View Details</span></a></p></div>
                 </div>
             </div>
             <?php } ?>

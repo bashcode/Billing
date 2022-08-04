@@ -8,6 +8,7 @@ class Database {
     private $password = '';
     private $row;
     private $sql;
+    private $id;
 
     function __construct() {
         try {
@@ -66,5 +67,19 @@ class Database {
         $email = $_SESSION['client']['email'];
         $this->sql->execute([':user' => $email]);
         return $this->sql;
+    }
+
+    function servicePage() {
+        $this->id = $_REQUEST['id'];
+        $this->sql = $this->connection->prepare("SELECT user FROM services WHERE id = $this->id");
+        $this->sql->execute();
+        $this->row = $this->sql->fetch();
+        if($this->row['user'] == $_SESSION['client']['email']){
+            $this->sql = $this->connection->prepare("SELECT * FROM services WHERE id = $this->id");
+            $this->sql->execute();
+            return $this->sql;
+        } else {
+            header('location: services.php');
+        }
     }
 }
