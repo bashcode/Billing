@@ -9,6 +9,7 @@ $row = $sql->fetch();
 $cpanel = new CPanel();
 $decode = $cpanel->requestInfo();
 $bandwidth = $cpanel->bandwidth();
+$test = $database->serviceExpiry();
 ?>
 <!DOCTYPE html>
 <html lang="en">

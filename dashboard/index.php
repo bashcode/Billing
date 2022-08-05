@@ -6,6 +6,7 @@ $session->dashboard();
 $database = new Database();
 $sql = $database->pullServices();
 $statement = $database->userInfo();
+$test = $database->serviceExpiry();
 ?>
 <!DOCTYPE html>
 <html lang="en">

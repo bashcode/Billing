@@ -5,6 +5,7 @@ $session = new Session();
 $session->dashboard();
 $database = new Database();
 $sql = $database->pullServices();
+$test = $database->serviceExpiry();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +59,7 @@ $sql = $database->pullServices();
                         </div>
                         <div class="service-div-inlien">
                             <p class="grey info-title">Expires On</p>
-                            <p class="purple info-info">August 12, 2021</p>
+                            <p class="purple info-info"><?php echo $row['expireAt'] ?></p>
                         </div>
                         <div class="service-div-inlien">
                             <p class="grey info-title">Price</p>

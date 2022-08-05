@@ -44,6 +44,7 @@ class Database {
                 id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 package_name VARCHAR(255) NOT NULL,
                 createdAt VARCHAR(50) NOT NULL,
+                expireAt VARCHAR(50) NULL,
                 domain TEXT NOT NULL,
                 user VARCHAR(255) NOT NULL,
                 cpanel_username VARCHAR(255) NOT NULL,
@@ -77,6 +78,23 @@ class Database {
         $this->sql->execute([':email' => $this->email]);
         $this->row = $this->sql->fetch();
         return $this->row;
+    }
+    
+    function serviceExpiry() {
+        $this->sql = $this->connection->prepare("SELECT * FROM services WHERE user = :user");
+        $this->email = $_SESSION['client']['email'];
+        $this->sql->execute([':user' => $this->email]);
+        $this->row = $this->sql->fetchAll();
+        foreach($this->row as $row){
+            $today = date("Y-m-d");
+            $expire = $row['expireAt'];
+            if($expire <= $today && $row['status'] != 'Terminated'){
+                $expireid = $row['id'];
+                $this->sql = $this->connection->prepare("UPDATE services SET status = 'Terminated' WHERE id = :id");
+                $this->sql->execute([':id' => $expireid]);
+                header("Refresh:0");
+            }
+        }
     }
 
     function servicePage() {
