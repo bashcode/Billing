@@ -9,6 +9,7 @@ class CPanel extends Database {
     private $result;
     private $decode;
     private $domain;
+    private $bandwidth;
 
     // https://cloud854.thundercloud.uk:2087/json-api/accountsummary?domain=qrow.dev
 
@@ -43,10 +44,21 @@ class CPanel extends Database {
         if ($this->result == false) {
             error_log("curl_exec threw error \"" . curl_error($this->curl) . "\" for $this->link");
         }
-        curl_close($this->curl);
         // print $this->result;
         $this->decode = json_decode($this->result, true);
         return $this->decode;
+    }
+
+    function bandwidth() {
+        $this->link = $this->row['module_link'] . "showbw?search={$this->domain}&searchtype=domain";
+        curl_setopt($this->curl, CURLOPT_URL, $this->link);
+        $this->result = curl_exec($this->curl);
+        if ($this->result == false) {
+            error_log("curl_exec threw error \"" . curl_error($this->curl) . "\" for $this->link");
+        }
+        // print $this->result;
+        $this->bandwidth = json_decode($this->result, true);
+        return $this->bandwidth;
     }
 }
 

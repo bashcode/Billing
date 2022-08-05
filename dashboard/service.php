@@ -8,6 +8,7 @@ $sql = $database->servicePage();
 $row = $sql->fetch();
 $cpanel = new CPanel();
 $decode = $cpanel->requestInfo();
+$bandwidth = $cpanel->bandwidth();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,20 +107,42 @@ $decode = $cpanel->requestInfo();
                     </div>
                     <div class="section-dash-two" style="display: inline-block;text-align: center;width: 100%;padding: 1.6rem 0;"><div style="display: inline-block">
 <div class="semi-donut margin" 
-     style="--percentage : 0; --fill: #FF3D00 ;">
-   0%
+<?php 
+     if($decode['acct'][0]['disklimit'] == 'Unlimited'){
+        echo 0;
+     } else {
+        $used = (int)$decode['acct'][0]['diskused']; 
+        $limit = (int)$decode['acct'][0]['disklimit']; 
+        $math = ($used * 100) / $limit; 
+     }
+     ?>
+     style="--percentage : <?php echo $math?>; --fill: #FF3D00 ;">
+     <?php echo $math?>%
 </div>
     <p class="grey usage-title"> Disk Usage </p>
-    <p class="purple usage-number"> <?php echo $decode['acct'][0]['diskused']; ?> MB / <?php echo $decode['acct'][0]['disklimit']; ?> MB </p>
+    <p class="purple usage-number"> <?php echo $decode['acct'][0]['diskused']; ?> MB / <?php echo $decode['acct'][0]['disklimit']; ?> </p>
 </div>
 
 <div style="display: inline-block">
 <div class="semi-donut margin" 
-     style="--percentage : 30; --fill: #FF3D00 ;">
-  30%
+<?php
+    if($bandwidth['bandwidth'][0]['acct'][0]['limit'] == 'unlimited'){
+        $limit = 'Unlimited';
+        $math = 0;
+    } else {
+        echo "hi";
+        $limit = (int)$bandwidth['bandwidth'][0]['acct'][0]['limit']/1024/1024; 
+        $limittext = $limit . " MB";
+        $used = (int)$bandwidth['bandwidth'][0]['acct'][0]['totalbytes'];
+        $math = ($used * 100) / $limit; 
+    }
+    ?>
+     style="--percentage : <?php echo $math ?>; --fill: #FF3D00 ;">
+     <?php echo $math ?>%
+
 </div>
     <p class="grey usage-title"> Bandwidth Usage </p>
-    <p class="purple usage-number"> 1500 MB / 5000 MB </p>
+    <p class="purple usage-number"> <?php echo $bandwidth['bandwidth'][0]['acct'][0]['totalbytes']; ?> MB / <?php echo $limittext ?> </p>
 </div></div>
                 </div>
             </div>
