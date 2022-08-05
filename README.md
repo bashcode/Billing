@@ -15,6 +15,7 @@ You are free to take this and use it as a base for your personal needs, hosting 
 
 ## What is in this right now?
 
+https://trello.com/b/TMG4VERD/ethereal-billing
 - Ability to create packages and services that automatically add to CPanel
 - User & Admin Authentication
 - Account Verification & Password Resets
