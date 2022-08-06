@@ -14,7 +14,11 @@ $test = $database->serviceExpiry();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Billing System</title>
+    <title>Ethereal - Dashboard</title>
+    <link rel="icon" type="image/png" href="../assets/img/ethereal-notext.svg">
+    <meta name="title" content="Ethereal - Billing Stem">
+    <meta name="description" content="The new future of easy CPanel management and billing!">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="../assets/css/styles.min.css">
@@ -83,8 +87,10 @@ $test = $database->serviceExpiry();
                         while($int < 3 && $row = $sql->fetch(PDO::FETCH_ASSOC)){
                         ?>
                         <div class="sec-div">
+                        <a href ="service.php?id=<?php echo $row['id']?>">
                             <p class="grey title-two"><?php echo $row['package_name']?><span class="date"><?php echo $row['createdAt']?></span><br></p>
                             <p class="grey title-link purple"><?php echo $row['domain']?><?php if($row['status'] == "Active"){echo "<span class='status green'>Active</span>";}else {echo "<span class='status red'>Terminated</span>";} ?><br></p>
+                        </a>
                         </div>
                         <?php
                         $int++;
